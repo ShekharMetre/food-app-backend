@@ -9,8 +9,10 @@ import {
   creatCart,
   fetchingItemList,
   quantityChanging,
+  
 } from "./controllers/Cart.js";
-import { Tables, deleting, successfulOrder } from "./controllers/Admin.js";
+import { Tables, deleting, itemDeletion, notAllowedUser, successfulOrder, tableDelete } from "./controllers/Admin.js";
+
 
 dotenv.config();
 const Port = process.env.PORT || 8080;
@@ -32,7 +34,9 @@ app.post("/quantity", quantityChanging);
 app.get("/admin", Tables);
 app.post("/delete", deleting);
 app.post("/success", successfulOrder);
-
+app.post('/noAllow',notAllowedUser)
+app.delete('/tdelete/:id',tableDelete)
+app.delete('/idelete/:id', itemDeletion);
 
 io.on('connection',(socket)=>{
   socket.on('new:table',(data)=>{

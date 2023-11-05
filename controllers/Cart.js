@@ -4,7 +4,7 @@ import { Item } from "../models/ItemSchema.js";
 
 export const creatCart = async (req, resp) => {
   await MongodConnection();
-  const { tableNo, userName } = req.body;
+  const { tableNo, userName,admin } = req.body;
   if (!tableNo) {
     console.log("Please Provide Table no.");
     return resp.send("Please Provide Table no.");
@@ -18,6 +18,7 @@ export const creatCart = async (req, resp) => {
     const CreatingCart = {
       userName,
       tableNo,
+      admin,
     };
     try {
       const createdCart = await Cart.create(CreatingCart);
